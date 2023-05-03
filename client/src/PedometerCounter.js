@@ -19,7 +19,7 @@ function PedometerCounter() {
       // call pedometer getstepcount method for each day store in array
       // post array 
       const arr  = []
-      for (int i = 0; i < 31; ++i) {
+      for (i = 0; i < 31; ++i) {
         const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
         arr.push(dailyStepsResult);
       }
@@ -43,7 +43,7 @@ function PedometerCounter() {
     return () => subscription && subscription.remove(); //clean up: no memory leaks
   }, []);
 
-  console.log(currentStepCount);
+  // console.log(currentStepCount);
 
   return (
     <View>

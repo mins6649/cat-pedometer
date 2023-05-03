@@ -155,4 +155,7 @@ api.add_resource(UserCats, '/user_cats')
 
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run(port=5555, debug=True, host="10.129.2.160")
+
+    # home ip:
+    # fl ip: http://10.129.2.160
