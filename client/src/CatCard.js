@@ -1,9 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
-// import black1 from './Cats/black1.png'
-// import black2 from './Cats/black2.png'
-// import calico from './Cats/calico.png'
-
 
 function CatCard({name, image, description }){
    

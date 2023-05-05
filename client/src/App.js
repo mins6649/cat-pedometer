@@ -1,21 +1,42 @@
-import React from 'react';
-// import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ImageBackground } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, ImageBackground, AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import AppNavigator from './AppNavigator';
+import Login from './Login';
+import Main from './Main'; 
 
-
-// BackgroundTask.define(async () => {
-//   // make post request (record steps for the day: table:DATE)
-//   // Remember to call finish()
-//   BackgroundTask.finish()
-// })
+const Stack = createNativeStackNavigator()
 
 function App() {
-  return (      
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState("");
+  
+
+  function handleLogin(user) {
+    setIsLoggedIn(true);
+    setUser(user)
+    console.log('login')
+    console.log(user)
+  }
+
+  return (
     <NavigationContainer>
-      <AppNavigator/>
+        <Stack.Navigator>
+        {isLoggedIn ? (
+          <Stack.Screen 
+            name="MAIN CONTAINER"
+            component={Main}
+            initialParams={{userInfo: user}}
+          />
+        ) : (
+          <Stack.Screen 
+            name="Login" 
+            component={Login} 
+            initialParams={{onLogin: handleLogin}}
+          />
+        )}
+        </Stack.Navigator>
     </NavigationContainer>
   );
 }
