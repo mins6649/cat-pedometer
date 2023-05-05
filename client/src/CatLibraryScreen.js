@@ -6,7 +6,7 @@ function CatLibraryScreen() {
 
     const [cats, setCats] = useState([]);
     useEffect(()=>{
-        fetch('http://10.129.2.160:5555/cats')
+        fetch(`http://192.168.1.186:5555/cats`)
         .then(res => res.json())
         .then(data => setCats(data))
     },[])

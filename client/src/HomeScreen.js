@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import PedometerCounter from './PedometerCounter';
 
 function HomeScreen() {
+
+    const [dates, setDates] = useState([]);
+    useEffect(()=>{
+        fetch(`http://192.168.1.186:5555/dates`)
+        .then(res => res.json())
+        .then(data => setDates(data))
+    },[])
+    console.log(dates)
 
     return(
         <View style={styles.layout}>

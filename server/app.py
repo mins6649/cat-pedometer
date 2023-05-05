@@ -1,11 +1,14 @@
-from flask import Flask, request, make_response, jsonify
+from flask import Flask, request, make_response, jsonify, session
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api, Resource
+# authentication:
+# import jwt
 
 from models import db, User, Date, UserCat, Cat
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'catsarecool'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
@@ -46,6 +49,22 @@ class Signup(Resource):
             201
         )
 api.add_resource(Signup, '/signup')
+
+class Login(Resource):
+    def post(self):
+        user = User.query.filter(
+            User.username == request.get_json()['username']
+        ).first()
+
+        session['user_id'] = user.id
+        return user.to_dict()
+api.add_resource(Login, '/login')
+
+class Logout(Resource):
+    def delete(self):
+        session['user_id'] = None
+        return {'message': '204: No Content'}, 204
+api.add_resource(Logout, '/logout')
 
 class UsersById(Resource):
     def get(self, id):
@@ -155,7 +174,7 @@ api.add_resource(UserCats, '/user_cats')
 
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True, host="10.129.2.160")
+    app.run(port=5555, debug=True, host='192.168.1.186')
 
-    # home ip:
+    # home ip: 192.168.1.186
     # fl ip: http://10.129.2.160
