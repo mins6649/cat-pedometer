@@ -9,19 +9,16 @@ import Main from './Main';
 const Stack = createNativeStackNavigator()
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState("");
-  
+  const [user, setUser] = useState(null);
 
   function handleLogin(user) {
-    setIsLoggedIn(true);
     setUser(user)
   }
-
+  
   return (
     <NavigationContainer>
         <Stack.Navigator>
-        {isLoggedIn ? (
+        {user != null ? (
           <Stack.Screen 
             name="MAIN CONTAINER"
             component={Main}
@@ -32,6 +29,7 @@ function App() {
             name="Login" 
             component={Login} 
             initialParams={{onLogin: handleLogin}}
+            options = {{}}
           />
         )}
         </Stack.Navigator>
