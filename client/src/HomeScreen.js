@@ -3,15 +3,12 @@ import { StyleSheet, Text, View, ImageBackground} from 'react-native';
 
 import PedometerCounter from './PedometerCounter';
 
-function HomeScreen() {
+function HomeScreen({navigation, route}) {
 
-    const [dates, setDates] = useState([]);
-    useEffect(()=>{
-        fetch(`http://192.168.1.186:5555/dates`)
-        .then(res => res.json())
-        .then(data => setDates(data))
-    },[])
-    console.log(dates)
+    const user = route.params.user
+    console.log(user)
+    const datesArr = user.dates
+    const totalSteps = datesArr.reduce(function (acc, obj) { return acc + obj.steps; }, 0);
 
     return(
         <View style={styles.layout}>
@@ -28,7 +25,7 @@ function HomeScreen() {
                 {/* TOTAL STEPS CONTAINER */}
                 <View style={styles.container}>
                     <Text>Total Number of Steps:</Text>
-                    <Text>987654</Text>
+                    <Text>{totalSteps}</Text>
                 </View>
 
                 {/* MISC CONTAINERS:  */}

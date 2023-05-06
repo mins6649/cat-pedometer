@@ -15,9 +15,7 @@ function PedometerCounter() {
       const end = new Date();
       const start = new Date();
       start.setHours(0,0,0,0);
-      // loop from beginning to now per day
-      // call pedometer getstepcount method for each day store in array
-      // post array 
+
       const arr  = []
       for (i = 0; i < 31; ++i) {
         const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
@@ -29,7 +27,7 @@ function PedometerCounter() {
       if (dailyStepsResult) {
         setDailySteps(dailyStepsResult.steps);
       }
-      // DAILY STEPS IS NOT GIVING THE CORRECT STEPS!
+  
 
       // SHOWS CURRENT STEPS!!! when app is open
       return Pedometer.watchStepCount(result => {

@@ -9,15 +9,13 @@ import CatLibraryScreen from './CatLibraryScreen';
 const Tab = createBottomTabNavigator();
 
 function Main({navigation, route}) {
-    const user = route.params.userInfo
-    // console.log(route.params.userInfo)
-    // console.log(`username: ${username}`);
-    console.log('HERE')
+    const user = route.params.user
+    console.log('MAIN')
     console.log(user)
 
     return(
         <Tab.Navigator>
-            <Tab.Screen name="Home" options={{title: 'Home'}} component={HomeScreen} />
+            <Tab.Screen name="Home" options={{title: 'Home'}} component={HomeScreen} initialParams={{user: user}}/>
             <Tab.Screen name="Cat Library" options={{title: 'Cat Library'}} component={CatLibraryScreen} />
         </Tab.Navigator>
     )
