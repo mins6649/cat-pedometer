@@ -6,9 +6,9 @@ import PedometerCounter from './PedometerCounter';
 function HomeScreen({navigation, route}) {
 
     const user = route.params.user
-    console.log(user)
     const datesArr = user.dates
     const totalSteps = datesArr.reduce(function (acc, obj) { return acc + obj.steps; }, 0);
+    console.log(totalSteps)
 
     return(
         <View style={styles.layout}>
