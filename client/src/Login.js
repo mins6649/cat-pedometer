@@ -18,12 +18,8 @@ function Login({navigation, route}) {
       })
         .then(async res => {
           if (res.status==200){
-            
             let user = await res.json()
-            console.log(`USERNAME: ${username}`)
-            console.log(user)
             route.params.onLogin(user) //TAKES US TO MAIN PAGE
-            // navigation.navigate('Main', {username: username})
           }
           else{
             console.log("error loggin in")

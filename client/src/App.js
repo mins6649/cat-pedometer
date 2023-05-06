@@ -16,8 +16,6 @@ function App() {
   function handleLogin(user) {
     setIsLoggedIn(true);
     setUser(user)
-    console.log('login')
-    console.log(user)
   }
 
   return (
@@ -27,7 +25,7 @@ function App() {
           <Stack.Screen 
             name="MAIN CONTAINER"
             component={Main}
-            initialParams={{userInfo: user}}
+            initialParams={{user: user}}
           />
         ) : (
           <Stack.Screen 
