@@ -10,8 +10,8 @@ const Tab = createBottomTabNavigator();
 
 function Main({navigation, route}) {
     const user = route.params.user
-    console.log('MAIN')
-    console.log(user)
+    // console.log('MAIN')
+    // console.log(user)
 
     return(
         <Tab.Navigator>

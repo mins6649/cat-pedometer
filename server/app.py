@@ -118,7 +118,6 @@ class Dates(Resource):
             new_date = Date(
                 day = data['day'],
                 steps = data['steps'],
-                # HOW DO WE INDICATE USER? USER.ID?
                 user_id = data['user_id'],
             )
             db.session.add(new_date)

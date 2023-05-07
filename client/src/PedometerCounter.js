@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Pedometer } from 'expo-sensors';
 
 const BACKFILL_DAYS = 7
-function PedometerCounter() {
+function PedometerCounter({user}) {
   const [isPedometerAvailable, setIsPedometerAvailable] = useState('checking');
   const [dailySteps, setDailySteps] = useState(0);
   const [currentStepCount, setCurrentStepCount] = useState(0);
@@ -22,9 +22,8 @@ function PedometerCounter() {
         const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
         arr.push(dailyStepsResult);
       }
-      // make post for 31 days
       const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
-      console.log("TESTING", dailyStepsResult);
+      // console.log("TESTING", dailyStepsResult);
       if (dailyStepsResult) {
         setDailySteps(dailyStepsResult.steps);
       }
@@ -42,6 +41,8 @@ function PedometerCounter() {
     return () => subscription && subscription.remove(); //clean up: no memory leaks
   }, []);
 
+  useEffect
+
   // console.log(currentStepCount);
   async function Last7Days () {
     const result = [];
@@ -52,16 +53,31 @@ function PedometerCounter() {
         end.setHours(23,59,59,99)
         start.setDate(start.getDate() - i); 
         start.setHours(0,0,0,0)
+
+        let dateInput = [start.getFullYear(), start.getMonth()+1, start.getDate()].join('-')
      
       const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
-
-        console.log(start)
-        console.log(end)
-        console.log(dailyStepsResult)
-        console.log("CEES STINKY")
+      let dayObj = {day: dateInput, steps: dailyStepsResult.steps, user_id: user.id}
+      // console.log(user.dates)
+      const savedDates = user.dates
+      const doesExist = savedDates.find(i => i.day === dateInput)
+      console.log('day obj',dayObj)
+      console.log('here', doesExist)
+      if (doesExist === undefined){
+        fetch(`http://192.168.1.186:5555/dates`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dayObj),
+        })
+        .then(res => res.json())
+        .then(data => console.log('data', data))
+      }
+      result.push(dayObj)
+      // console.log('result', result)
     }
-    console.log('--------------')
-    return(result.join(','));
+    return(result);
   } 
   
   return (

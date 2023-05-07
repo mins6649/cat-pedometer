@@ -8,7 +8,7 @@ function HomeScreen({navigation, route}) {
     const user = route.params.user
     const datesArr = user.dates
     const totalSteps = datesArr.reduce(function (acc, obj) { return acc + obj.steps; }, 0);
-    console.log(totalSteps)
+    // console.log(totalSteps)
 
     return(
         <View style={styles.layout}>
@@ -19,7 +19,7 @@ function HomeScreen({navigation, route}) {
                 <View style={styles.container}>
                     {/* <Text>Today's Current Steps:</Text>
                     <Text>12345</Text> */}
-                    <PedometerCounter/>
+                    <PedometerCounter user={user}/>
                 </View>
 
                 {/* TOTAL STEPS CONTAINER */}

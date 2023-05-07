@@ -27,8 +27,8 @@ class Date(db.Model, SerializerMixin):
     __tablename__ = 'dates'
 
     id = db.Column(db.Integer, primary_key=True)
-    day = db.Column(db.Date)
-    # day = db.Column(db.Integer)
+    # day = db.Column(db.Date)
+    day = db.Column(db.String)
     steps = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     created_at = db.Column(db.DateTime, server_default=db.func.now())
