@@ -151,7 +151,11 @@ class UserCats(Resource):
             user_cats_dict_list,
             200
         )
+    
     def post(self):
+        # print (request.get_json)
+        print ('hi')
+    
         data = request.get_json()
         try:
             new_user_cat = UserCat(
@@ -165,6 +169,7 @@ class UserCats(Resource):
                 e.__str__(), 
                 422
             )
+
         return make_response(
             new_user_cat.to_dict(),
             201

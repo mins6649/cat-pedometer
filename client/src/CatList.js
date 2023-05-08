@@ -55,14 +55,14 @@ import yellow from './Cats/yellow.png'
 function CatList({cats}){
 
     const catList = [black1, black2, black3, black4, black5, blue1, blue2, blue3, blue4, brown1, brown2, brown3, brown4, brown5, brown6, brown7, brown8, brown9, calico, cottoncandy_blue, cottoncandy_pink, cream1, cream2, dark, gameboy1, gameboy2, gameboy3, ghost, gold, gray1, gray2, gray3, hairless1, hairless2, indigo, orange1, orange2, orange3, orange4, peach, radioactive, red1, red2, sealpoint, teal, white, whitegray1, whitegray2, yellow]
-    console.log(catList.length)
 
-    const renderCats = cats?.map((cat, i)=>{
+
+    const renderCats = cats.map((cat, i)=>{
         return <CatCard 
-                key={cat.id}
+                key={i}
                 name={cat.name}
                 // image = {cat.image}
-                image={catList[i]}
+                image={catList[(cat.id)-1]}
                 description={cat.description}
                 />
     })

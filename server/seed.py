@@ -95,17 +95,17 @@ with app.app_context():
     db.session.commit()
 
 
-    # print('Creating Cat Owners ... ')
-    # uc1 = UserCat(user_id = u1.id, cat_id = c1.id)
-    # uc2 = UserCat(user_id = u2.id, cat_id = c1.id)
-    # uc3 = UserCat(user_id = u2.id, cat_id = c2.id)
-    # uc4 = UserCat(user_id = u3.id, cat_id = c1.id)
-    # uc5 = UserCat(user_id = u3.id, cat_id = c2.id)
-    # uc6 = UserCat(user_id = u3.id, cat_id = c3.id)
+    print('Creating Cat Owners ... ')
+    uc1 = UserCat(user_id = u1.id, cat_id = c1.id)
+    uc2 = UserCat(user_id = u2.id, cat_id = c1.id)
+    uc3 = UserCat(user_id = u2.id, cat_id = c2.id)
+    uc4 = UserCat(user_id = u3.id, cat_id = c1.id)
+    uc5 = UserCat(user_id = u3.id, cat_id = c2.id)
+    uc6 = UserCat(user_id = u3.id, cat_id = c3.id)
 
-    # usercats = [uc1, uc2, uc3, uc4, uc5, uc6]
-    # db.session.add_all(usercats)
-    # db.session.commit()
+    usercats = [uc1, uc2, uc3, uc4, uc5, uc6]
+    db.session.add_all(usercats)
+    db.session.commit()
 
 
 

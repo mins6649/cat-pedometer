@@ -1,25 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, ImageBackground} from 'react-native';
+import React, {useContext} from 'react';
+import { StyleSheet, Text, View, ImageBackground, Button} from 'react-native';
+import { pedometerContext } from './PedometerProvider';
 
-import PedometerCounter from './PedometerCounter';
 
 function HomeScreen({navigation, route}) {
-
-    const user = route.params.user
-    const datesArr = user.dates
-    const totalSteps = datesArr.reduce(function (acc, obj) { return acc + obj.steps; }, 0);
-    // console.log(totalSteps)
+    const { totalSteps, catsToBeCollected, dailySteps, currentStepCount, gotcha} = useContext(pedometerContext)
+    let isGotcha = <Button onPress = {gotcha} title= {catsToBeCollected.toString() + 'Cat Ready To Be Collected!'}/>
+    let noGotcha = <Text>No cats to be collected</Text>
 
     return(
         <View style={styles.layout}>
             <ImageBackground source={require('../assets/nature-background.jpeg')} style={styles.background}>
                 <Text style={styles.title}>Name Of App</Text>
-
+                    
                 {/* DAILY STEPS CONTAINER */}
                 <View style={styles.container}>
-                    {/* <Text>Today's Current Steps:</Text>
-                    <Text>12345</Text> */}
-                    <PedometerCounter user={user}/>
+                <Text>Today's Current Steps: {dailySteps} steps</Text>
+                <Text>Walk! And watch this go up: {currentStepCount}</Text>
                 </View>
 
                 {/* TOTAL STEPS CONTAINER */}
@@ -28,9 +25,9 @@ function HomeScreen({navigation, route}) {
                     <Text>{totalSteps}</Text>
                 </View>
 
-                {/* MISC CONTAINERS:  */}
+                {/* make this ternary condition based on catsToBeCollected */}
                 <View style={styles.container}>
-                    <Text>GOTCHA: "New Cat Alert"</Text>
+                    {catsToBeCollected ? isGotcha : noGotcha}
                 </View>
                 <View style={[styles.container, styles.cat_animation]}>
                     <Text>CAT ANIMATION</Text>

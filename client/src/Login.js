@@ -4,11 +4,8 @@ import { useNavigation } from '@react-navigation/native';
 
 
 function Login({navigation, route}) {
-
     const [username, setUsername] = useState("");
-
     async function handleSubmit() {
-
       fetch(`http://192.168.1.186:5555/login`, {
         method: "POST",
         headers: {
@@ -19,7 +16,7 @@ function Login({navigation, route}) {
         .then(async res => {
           if (res.status==200){
             let user = await res.json()
-            route.params.onLogin(user) //TAKES US TO MAIN PAGE
+            route.params.onLogin(user)
           }
           else{
             console.log("error loggin in")

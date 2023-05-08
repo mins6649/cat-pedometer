@@ -1,23 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, { useContext} from 'react';
 import { ScrollView, StyleSheet, Text, View} from 'react-native';
 import CatList from './CatList';
+import { pedometerContext } from './PedometerProvider';
 
-function CatLibraryScreen() {
-
-    const [cats, setCats] = useState([]);
-    useEffect(()=>{
-        fetch(`http://192.168.1.186:5555/cats`)
-        .then(res => res.json())
-        .then(data => setCats(data))
-    },[])
-
-    console.log(cats)
+function CatLibraryScreen({navigation, route}) {
+    const {catUserOwns} = useContext(pedometerContext)
 
     return(
         <View>
             <Text>Cat Library</Text>
             <ScrollView>
-                <CatList cats={cats}/>
+                <CatList cats={catUserOwns}/>
             </ScrollView>
         </View>
     )
