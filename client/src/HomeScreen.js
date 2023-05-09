@@ -1,12 +1,25 @@
 import React, {useContext} from 'react';
 import { StyleSheet, Text, View, ImageBackground, Button} from 'react-native';
 import { pedometerContext } from './PedometerProvider';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function HomeScreen({navigation, route}) {
     const { totalSteps, catsToBeCollected, dailySteps, currentStepCount, gotcha} = useContext(pedometerContext)
     let isGotcha = <Button onPress = {gotcha} title= {catsToBeCollected.toString() + 'Cat Ready To Be Collected!'}/>
     let noGotcha = <Text>No cats to be collected</Text>
+
+    console.log('HOME', route.params)
+
+    function handleLogout() {
+      fetch(`http://192.168.1.186:5555/logout`, {
+        method: "DELETE",
+      })
+      .then(() => {
+        route.params.setUser(null)
+        AsyncStorage.removeItem('loggedIn');
+      });
+    }
 
     return(
         <View style={styles.layout}>
@@ -32,6 +45,10 @@ function HomeScreen({navigation, route}) {
                 <View style={[styles.container, styles.cat_animation]}>
                     <Text>CAT ANIMATION</Text>
                 </View>
+                <Button
+                  onPress={handleLogout}
+                  title='Logout'
+                />
             </ImageBackground>
         </View>
     )

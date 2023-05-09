@@ -11,17 +11,16 @@ const PedometerProvider = (props) => {
     const datesArr = user.dates
     const totalCats = user.user_cats
     const [totalSteps, setTotalSteps] = useState(datesArr.reduce( (acc, obj) =>  acc + obj.steps, 0))
-    const remainingSteps = totalSteps - (totalCats.length * 10000)
-    const [catsToBeCollected, setCatsToBeCollected] = useState(Math.floor(remainingSteps / 10000) )
+    const remainingSteps = totalSteps  - (totalCats.length * 10000)
+    const [catsToBeCollected, setCatsToBeCollected] = useState(Math.max(Math.floor(remainingSteps / 10000),0))
     const [dailySteps, setDailySteps] = useState(0);
     const [currentStepCount, setCurrentStepCount] = useState(0);
     const [catUserOwns, setCatUserOwns] = useState(user.user_cats.map(userCat => userCat.cat)) 
     const [openGatcha, setOpenGatcha] = useState(false)
-
+    
     const gotcha = async()=>{
         setOpenGatcha(true)
         let randomInt = Math.ceil(Math.random() * cats.length)
-        // console.log('num',randomInt)
         const catObj = {user_id: user.id, cat_id: randomInt}
         
         await fetch(`http://192.168.1.186:5555/user_cats`, {
@@ -33,11 +32,9 @@ const PedometerProvider = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            // console.log('post data', data.cat) 
             setOpenGatcha(false)
             setCatsToBeCollected(prev=>prev-1)
             setCatUserOwns([...catUserOwns, data.cat])
-            // console.log('usercats POST', catUserOwns)
         })
     }
 
@@ -75,6 +72,7 @@ const PedometerProvider = (props) => {
     
     async function Last7Days () {
         const result = [];
+        let steps = totalSteps
         for (let i=1; i<=BACKFILL_DAYS; i++) {
             const start = new Date();
             const end = new Date();
@@ -93,7 +91,7 @@ const PedometerProvider = (props) => {
             const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
             let dayObj = {day: dateInput, steps: dailyStepsResult.steps, user_id: user.id}
        
-            fetch(`http://192.168.1.186:5555/dates`, {
+            await fetch(`http://192.168.1.186:5555/dates`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -103,10 +101,14 @@ const PedometerProvider = (props) => {
             .then(res => res.json())
             .then(data => {
                 setTotalSteps(prev => prev + dailyStepsResult.steps)
-            })
-            
-        }
-      } 
+                steps += dailyStepsResult.steps
+              })
+              
+            }
+            const remainingSteps = (steps) - (totalCats.length * 10000)
+            setCatsToBeCollected(Math.floor(remainingSteps / 10000))
+            console.log('here', totalSteps, steps, remainingSteps, catsToBeCollected)
+          } 
     // console.log('HERERERERER',totalSteps, setTotalSteps, catsToBeCollected, setCatsToBeCollected, dailySteps, setDailySteps, currentStepCount, setCurrentStepCount, catUserOwns, setCatUserOwns, openGatcha, setOpenGatcha, gotcha)
     return (
             

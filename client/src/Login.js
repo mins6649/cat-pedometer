@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 
 
 function Login({navigation, route}) {
@@ -27,7 +26,7 @@ function Login({navigation, route}) {
                             value={createPassword}
                             placeholder='password'
                           />
-                          {errorMessage !== "" && errorMessage}
+                          {errorMessage !== "" && <Text>{errorMessage}</Text>}
                           <Button 
                             title='Signup!'
                             onPress={handleSignup}

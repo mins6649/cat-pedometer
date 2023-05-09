@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet, Text, View, ImageBackground, AppRegistry } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Login from './Login';
 import Main from './Main'; 
 import PedometerProvider from './PedometerProvider';
 
 const Stack = createNativeStackNavigator()
+
 
 function App() {
   const [user, setUser] = useState(null);
@@ -16,11 +18,21 @@ function App() {
       fetch(`http://192.168.1.186:5555/cats`)
       .then(res => res.json())
       .then(data => setCats(data))
+      AsyncStorage.getItem('loggedIn').then((value) => {
+        if (value) {
+          console.log("VALUE", value)
+          fetch(`http://192.168.1.186:5555/users/${value}`)
+          .then(res => res.json())
+          .then(data => setUser(data))
+        }
+     });
   },[])
- 
-
+  console.log('APP.PY',user)
   const handleLogin = (user) => {
     setUser(user)
+    console.log('USRISR', user)
+    AsyncStorage.setItem('loggedIn', String(user.id));
+
   }
   
   return (
@@ -30,7 +42,7 @@ function App() {
             <Stack.Screen 
               name="MAIN CONTAINER"
               component={Main}
-              initialParams={{user, cats}}
+              initialParams={{user, setUser, cats}}
             />
         ) : (
           <Stack.Screen 
