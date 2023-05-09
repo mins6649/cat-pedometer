@@ -22,6 +22,17 @@ class User(db.Model, SerializerMixin):
 
     cats = association_proxy('user_cats', 'cat')
 
+    @validates('email')
+    def validate_email(self, key, address):
+        if '@' not in address:
+            raise ValueError("Failed simple email validation")
+        return address
+    @validates('password')
+    def validate_password(self, key, value):
+        if len(value) < 1:
+            raise ValueError("Please Enter a Password")
+        return value
+
 
 class Date(db.Model, SerializerMixin):
     __tablename__ = 'dates'

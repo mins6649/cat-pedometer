@@ -31,6 +31,18 @@ api.add_resource(Users, '/users')
 class Signup(Resource):
     def post(self):
         data = request.get_json()
+        user = User.query.filter(User.username == data['username']).first()
+        email = User.query.filter(User.email == data['email']).first()
+        if user:
+            return make_response(
+                {'message': "Username already exists"},
+                406
+            )
+        if email:
+            return make_response(
+                {'message': 'Email already exists'},
+                409
+            )
         try:
             new_user = User(
                 username = data['username'],
@@ -53,7 +65,8 @@ api.add_resource(Signup, '/signup')
 class Login(Resource):
     def post(self):
         user = User.query.filter(
-            User.username == request.get_json()['username']
+            User.username == request.get_json()['username'],
+            User.password == request.get_json()['password']
         ).first()
 
         session['user_id'] = user.id

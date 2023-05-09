@@ -18,8 +18,6 @@ const PedometerProvider = (props) => {
     const [catUserOwns, setCatUserOwns] = useState(user.user_cats.map(userCat => userCat.cat)) 
     const [openGatcha, setOpenGatcha] = useState(false)
 
-    console.log('pedo',totalCats.length)
-
     const gotcha = async()=>{
         setOpenGatcha(true)
         let randomInt = Math.ceil(Math.random() * cats.length)
@@ -31,7 +29,7 @@ const PedometerProvider = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify( catObj),
+          body: JSON.stringify(catObj),
         })
         .then(res => res.json())
         .then(data => {
