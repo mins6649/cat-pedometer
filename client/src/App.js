@@ -34,8 +34,6 @@ function App() {
     setUser(user)
     AsyncStorage.setItem('loggedIn', String(user.id));
   }
-  // console.log("APP USER", user)
-  // console.log("APP CAT", cats)
   
   return (
     <NavigationContainer style={styles.container}>

@@ -56,7 +56,6 @@ const PedometerProvider = (props) => {
           if (dailyStepsResult) {
             setDailySteps(dailyStepsResult.steps);
           }
-          console.log('ds', dailySteps)
           // SHOWS CURRENT STEPS!!! when app is open
           return Pedometer.watchStepCount(result => {
               setCurrentStepCount(result.steps);
@@ -66,7 +65,6 @@ const PedometerProvider = (props) => {
     useEffect(() => {
         Last7Days();
         const subscription = subscribe();
-        console.log('SUB',subscription)
         return () => subscription && subscription.remove();
 
     }, []);
@@ -88,7 +86,6 @@ const PedometerProvider = (props) => {
             if (doesExist != undefined){
                 continue
             }
-            console.log('does ex', doesExist)
             const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
             let dayObj = {day: dateInput, steps: dailyStepsResult.steps, user_id: user.id}
        
@@ -101,7 +98,6 @@ const PedometerProvider = (props) => {
             })
             .then(res => res.json())
             .then(data => {
-                console.log('7daycats')
                 setTotalSteps(prev => prev + dailyStepsResult.steps)
                 steps += dailyStepsResult.steps
               })
