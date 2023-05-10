@@ -38,7 +38,7 @@ function App() {
         <Stack.Navigator>
         {user != null && cats !=null ? (
             <Stack.Screen 
-              name="MAIN CONTAINER"
+              name="Walk 10K steps to get a cat !"
               component={Main}
               initialParams={{user, cats, setUser}}
             />

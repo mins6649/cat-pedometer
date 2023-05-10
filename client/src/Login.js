@@ -90,6 +90,7 @@ function Login({navigation, route}) {
       <View>
         <ImageBackground source={require('../assets/nature-background.jpeg')} style={styles.background}>
           <View style={styles.container}>
+            <Text style={styles.title}>PawDometer</Text>
             <TextInput 
                 onChangeText={text => setUsername(text)}
                 value={username}
@@ -103,6 +104,7 @@ function Login({navigation, route}) {
                 secureTextEntry
                 style={styles.textInput}
             />
+            {/* TODO: need to add error message for login */}
             <View style={styles.buttonContainer}>
               <View style={styles.loginButton}>
                 <Button 
@@ -133,6 +135,16 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: 20
+  },
+  title: {
+    fontSize: 40,
+    textAlign: 'center',
+    paddingBottom: 20,
+    color: '#ffffff',
+    fontWeight: 'bold',
+    textShadowColor: 'pink',
+    textShadowOffset: {width: -3, height: 1},
+    textShadowRadius: 5
   },
   buttonContainer: {
     alignItems: 'center',

@@ -9,8 +9,6 @@ const PedometerProvider = (props) => {
     const user = props.user
     const cats = props.cats
     const datesArr = user.dates
-    console.log('user', user)
-    console.log('datesArr', datesArr)
     const totalCats = user.user_cats
     const [totalSteps, setTotalSteps] = useState(datesArr.reduce( (acc, obj) =>  acc + obj.steps, 0))
     const remainingSteps = totalSteps  - (totalCats.length * 10000)
