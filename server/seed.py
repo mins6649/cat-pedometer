@@ -28,7 +28,7 @@ with app.app_context():
     # d6 = Date(day = date(2023, 4, 24), steps = 7000, user_id = u3.id)
 
     d1 = Date(day = "2023-4-23", steps = 20000, user_id = u1.id)
-    d2 = Date(day = "2023-4-23", steps = 290000, user_id = u2.id)
+    d2 = Date(day = "2023-4-23", steps = 500000, user_id = u2.id)
 
     dates = [d1, d2]
     db.session.add_all(dates)
@@ -121,8 +121,31 @@ with app.app_context():
     uc27 = UserCat(user_id = u2.id, cat_id = c27.id)
     uc28 = UserCat(user_id = u2.id, cat_id = c28.id)
     uc29 = UserCat(user_id = u2.id, cat_id = c29.id)
+    uc30 = UserCat(user_id = u2.id, cat_id = c30.id)
+    uc31 = UserCat(user_id = u2.id, cat_id = c31.id)
+    uc32 = UserCat(user_id = u2.id, cat_id = c32.id)
+    uc33 = UserCat(user_id = u2.id, cat_id = c33.id)
+    uc34 = UserCat(user_id = u2.id, cat_id = c34.id)
+    uc35 = UserCat(user_id = u2.id, cat_id = c35.id)
+    uc36 = UserCat(user_id = u2.id, cat_id = c36.id)
+    uc37 = UserCat(user_id = u2.id, cat_id = c37.id)
+    uc38 = UserCat(user_id = u2.id, cat_id = c38.id)
+    uc39 = UserCat(user_id = u2.id, cat_id = c39.id)
+    uc40 = UserCat(user_id = u2.id, cat_id = c40.id)
+    uc41 = UserCat(user_id = u2.id, cat_id = c41.id)
+    uc42 = UserCat(user_id = u2.id, cat_id = c42.id)
+    uc43 = UserCat(user_id = u2.id, cat_id = c43.id)
+    uc44 = UserCat(user_id = u2.id, cat_id = c44.id)
+    uc45 = UserCat(user_id = u2.id, cat_id = c45.id)
+    uc46 = UserCat(user_id = u2.id, cat_id = c46.id)
+    uc47 = UserCat(user_id = u2.id, cat_id = c47.id)
+    uc48 = UserCat(user_id = u2.id, cat_id = c48.id)
+    uc49 = UserCat(user_id = u2.id, cat_id = c49.id)
 
-    usercats = [uc1, uc2, uc3, uc4, uc5, uc6, uc7, uc8, uc9, uc10, uc11, uc12, uc13, uc14, uc15, uc16, uc17, uc18, uc19, uc20, uc21, uc22, uc23, uc24, uc25, uc26, uc27, uc28, uc29]
+
+
+
+    usercats = [uc1, uc2, uc3, uc4, uc5, uc6, uc7, uc8, uc9, uc10, uc11, uc12, uc13, uc14, uc15, uc16, uc17, uc18, uc19, uc20, uc21, uc22, uc23, uc24, uc25, uc26, uc27, uc28, uc29, uc30, uc31, uc32, uc33, uc34, uc35, uc36, uc37, uc38, uc39, uc40, uc41, uc42, uc43, uc44, uc45, uc46, uc47, uc48, uc49]
     db.session.add_all(usercats)
     db.session.commit()
 

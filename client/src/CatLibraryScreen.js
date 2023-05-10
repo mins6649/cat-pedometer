@@ -6,7 +6,7 @@ import { pedometerContext } from './PedometerProvider';
 function CatLibraryScreen({navigation, route}) {
     const {catUserOwns} = useContext(pedometerContext)
     return(
-        <View>
+        <View style={styles.layout}>
             <ImageBackground source={require('../assets/nature-background.jpeg')} style={styles.background}>
                 <Text style={styles.title}>My Cats</Text>
                 <ScrollView>
@@ -23,6 +23,15 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+      },
+      background: {
+        flex:1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        width: '100%',
+        height: '100%',
       },
       title: {
         fontSize: 30,

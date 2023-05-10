@@ -19,7 +19,7 @@ function HomeScreen({navigation, route}) {
     </View>
 
     function handleLogout() {
-      fetch(`http://192.168.1.186:5555/logout`, {
+      fetch(`http://10.129.2.160:5555/logout`, {
         method: "DELETE",
       })
       .then(() => {

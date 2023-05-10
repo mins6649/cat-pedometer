@@ -23,7 +23,7 @@ const PedometerProvider = (props) => {
         let randomInt = Math.ceil(Math.random() * cats.length)
         var catObj = {user_id: user.id, cat_id: randomInt}
         
-        await fetch(`http://192.168.1.186:5555/user_cats`, {
+        await fetch(`http://10.129.2.160:5555/user_cats`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -32,10 +32,10 @@ const PedometerProvider = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-            setOpenGatcha(false)
-            setCatsToBeCollected(prev=>prev-1)
-            setCatUserOwns([...catUserOwns, data.cat])
-        })
+          setOpenGatcha(false)
+          setCatsToBeCollected(prev=>prev-1)
+          setCatUserOwns([...catUserOwns, data.cat])
+      })
     }
 
     //Total Steps Logic:
@@ -56,7 +56,7 @@ const PedometerProvider = (props) => {
           if (dailyStepsResult) {
             setDailySteps(dailyStepsResult.steps);
           }
-      
+          console.log('ds', dailySteps)
           // SHOWS CURRENT STEPS!!! when app is open
           return Pedometer.watchStepCount(result => {
               setCurrentStepCount(result.steps);
@@ -66,9 +66,10 @@ const PedometerProvider = (props) => {
     useEffect(() => {
         Last7Days();
         const subscription = subscribe();
+        console.log('SUB',subscription)
         return () => subscription && subscription.remove();
+
     }, []);
-    
     
     async function Last7Days () {
         const result = [];
@@ -87,11 +88,11 @@ const PedometerProvider = (props) => {
             if (doesExist != undefined){
                 continue
             }
-         
+            console.log('does ex', doesExist)
             const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
             let dayObj = {day: dateInput, steps: dailyStepsResult.steps, user_id: user.id}
        
-            await fetch(`http://192.168.1.186:5555/dates`, {
+            await fetch(`http://10.129.2.160:5555/dates`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
@@ -100,9 +101,11 @@ const PedometerProvider = (props) => {
             })
             .then(res => res.json())
             .then(data => {
+                console.log('7daycats')
                 setTotalSteps(prev => prev + dailyStepsResult.steps)
                 steps += dailyStepsResult.steps
               })
+
               
             }
             const remainingSteps = (steps) - (totalCats.length * 10000)

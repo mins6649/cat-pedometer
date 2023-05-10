@@ -13,21 +13,18 @@ const Stack = createNativeStackNavigator()
 
 function App() {
   const [fontsLoaded] = useFonts({
-    'Gaegu-Regular': require('../assets/fonts/Gaegu-Regular.ttf'),
+    // 'Gaegu-Regular': require('../assets/fonts/Gaegu-Regular.ttf'),
     'Gaegu-Bold': require('../assets/fonts/Gaegu-Bold.ttf')
   });
-  // if (!fontsLoaded) {
-  //   return <AppLoading />;
-  // }
   const [user, setUser] = useState(null);
   const [cats, setCats] = useState(null);
   useEffect(()=>{
-      fetch(`http://192.168.1.186:5555/cats`)
+      fetch(`http://10.129.2.160:5555/cats`)
       .then(res => res.json())
       .then(data => setCats(data))
       AsyncStorage.getItem('loggedIn').then((value) => {
         if (value) {
-          fetch(`http://192.168.1.186:5555/users/${value}`)
+          fetch(`http://10.129.2.160:5555/users/${value}`)
           .then(res => res.json())
           .then(data => setUser(data))
         }
@@ -37,15 +34,15 @@ function App() {
     setUser(user)
     AsyncStorage.setItem('loggedIn', String(user.id));
   }
-  console.log("APP USER", user)
-  console.log("APP CAT", cats)
+  // console.log("APP USER", user)
+  // console.log("APP CAT", cats)
   
   return (
     <NavigationContainer style={styles.container}>
         <Stack.Navigator>
         {user != null && cats !=null ? (
             <Stack.Screen 
-              name="Walk 10K steps to get a cat !"
+              name="Walk 10K steps to get a cat"
               component={Main}
               initialParams={{user, cats, setUser}}
             />
