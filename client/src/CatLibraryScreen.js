@@ -5,7 +5,6 @@ import { pedometerContext } from './PedometerProvider';
 
 function CatLibraryScreen({navigation, route}) {
     const {catUserOwns} = useContext(pedometerContext)
-
     return(
         <View>
             <Text>Cat Library</Text>

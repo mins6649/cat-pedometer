@@ -9,6 +9,8 @@ const PedometerProvider = (props) => {
     const user = props.user
     const cats = props.cats
     const datesArr = user.dates
+    console.log('user', user)
+    console.log('datesArr', datesArr)
     const totalCats = user.user_cats
     const [totalSteps, setTotalSteps] = useState(datesArr.reduce( (acc, obj) =>  acc + obj.steps, 0))
     const remainingSteps = totalSteps  - (totalCats.length * 10000)
@@ -21,7 +23,7 @@ const PedometerProvider = (props) => {
     const gotcha = async()=>{
         setOpenGatcha(true)
         let randomInt = Math.ceil(Math.random() * cats.length)
-        const catObj = {user_id: user.id, cat_id: randomInt}
+        var catObj = {user_id: user.id, cat_id: randomInt}
         
         await fetch(`http://192.168.1.186:5555/user_cats`, {
           method: "POST",
@@ -107,10 +109,8 @@ const PedometerProvider = (props) => {
             }
             const remainingSteps = (steps) - (totalCats.length * 10000)
             setCatsToBeCollected(Math.floor(remainingSteps / 10000))
-            console.log('here', totalSteps, steps, remainingSteps, catsToBeCollected)
           } 
-    // console.log('HERERERERER',totalSteps, setTotalSteps, catsToBeCollected, setCatsToBeCollected, dailySteps, setDailySteps, currentStepCount, setCurrentStepCount, catUserOwns, setCatUserOwns, openGatcha, setOpenGatcha, gotcha)
-    return (
+      return (
             
         <pedometerContext.Provider value={{totalSteps, setTotalSteps, catsToBeCollected, setCatsToBeCollected, dailySteps, setDailySteps, currentStepCount, setCurrentStepCount, catUserOwns, setCatUserOwns, openGatcha, setOpenGatcha, gotcha}}>
             {props.children}

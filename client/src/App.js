@@ -13,36 +13,34 @@ const Stack = createNativeStackNavigator()
 
 function App() {
   const [user, setUser] = useState(null);
-  const [cats, setCats] = useState([]);
+  const [cats, setCats] = useState(null);
   useEffect(()=>{
       fetch(`http://192.168.1.186:5555/cats`)
       .then(res => res.json())
       .then(data => setCats(data))
       AsyncStorage.getItem('loggedIn').then((value) => {
         if (value) {
-          console.log("VALUE", value)
           fetch(`http://192.168.1.186:5555/users/${value}`)
           .then(res => res.json())
           .then(data => setUser(data))
         }
      });
   },[])
-  console.log('APP.PY',user)
   const handleLogin = (user) => {
     setUser(user)
-    console.log('USRISR', user)
     AsyncStorage.setItem('loggedIn', String(user.id));
-
   }
+  console.log("APP USER", user)
+  console.log("APP CAT", cats)
   
   return (
     <NavigationContainer>
         <Stack.Navigator>
-        {user != null ? (
+        {user != null && cats !=null ? (
             <Stack.Screen 
               name="MAIN CONTAINER"
               component={Main}
-              initialParams={{user, setUser, cats}}
+              initialParams={{user, cats, setUser}}
             />
         ) : (
           <Stack.Screen 

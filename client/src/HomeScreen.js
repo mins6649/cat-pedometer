@@ -5,11 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 function HomeScreen({navigation, route}) {
-    const { totalSteps, catsToBeCollected, dailySteps, currentStepCount, gotcha} = useContext(pedometerContext)
+    const { totalSteps, catsToBeCollected, dailySteps, remainingSteps, currentStepCount, gotcha} = useContext(pedometerContext)
     let isGotcha = <Button onPress = {gotcha} title= {catsToBeCollected.toString() + 'Cat Ready To Be Collected!'}/>
     let noGotcha = <Text>No cats to be collected</Text>
-
-    console.log('HOME', route.params)
 
     function handleLogout() {
       fetch(`http://192.168.1.186:5555/logout`, {
@@ -26,25 +24,27 @@ function HomeScreen({navigation, route}) {
             <ImageBackground source={require('../assets/nature-background.jpeg')} style={styles.background}>
                 <Text style={styles.title}>Name Of App</Text>
                     
-                {/* DAILY STEPS CONTAINER */}
                 <View style={styles.container}>
-                <Text>Today's Current Steps: {dailySteps} steps</Text>
-                <Text>Walk! And watch this go up: {currentStepCount}</Text>
+                  <Text>Today's Current Steps: </Text>
+                  <Text>{dailySteps} steps</Text>
                 </View>
 
-                {/* TOTAL STEPS CONTAINER */}
+                <View style={styles.container}>
+                  <Text>Currently on a walk? Count your steps:</Text>
+                  <Text>{currentStepCount} steps</Text>
+                </View>
+
                 <View style={styles.container}>
                     <Text>Total Number of Steps:</Text>
                     <Text>{totalSteps}</Text>
                 </View>
 
-                {/* make this ternary condition based on catsToBeCollected */}
                 <View style={styles.container}>
                     {catsToBeCollected ? isGotcha : noGotcha}
                 </View>
-                <View style={[styles.container, styles.cat_animation]}>
+                {/* <View style={[styles.container, styles.cat_animation]}>
                     <Text>CAT ANIMATION</Text>
-                </View>
+                </View> */}
                 <Button
                   onPress={handleLogout}
                   title='Logout'

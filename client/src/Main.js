@@ -8,10 +8,6 @@ import PedometerProvider from './PedometerProvider';
 const Tab = createBottomTabNavigator();
 
 function Main({navigation, route}) {
-    console.log('MIAIN', route.params)
-    
-
-
     return(
         <PedometerProvider user={route.params.user} cats={route.params.cats}>
         <Tab.Navigator>

@@ -13,9 +13,9 @@ with app.app_context():
     print("Creating Users ... ")
     u1 = User(username = 'min', email = 'min@gmail.com', password = 'password')
     u2 = User(username = 'jane', email = 'jane@gmail.com', password = 'password')
-    u3 = User(username = 'bob', email = 'bobda@gmail.com', password = 'password')
+  
 
-    users = [u1, u2, u3]
+    users = [u1, u2]
     db.session.add_all(users)
     db.session.commit()
 
@@ -27,14 +27,10 @@ with app.app_context():
     # d5 = Date(day = date(2023, 4, 24), steps = 6000, user_id = u2.id)
     # d6 = Date(day = date(2023, 4, 24), steps = 7000, user_id = u3.id)
 
-    d1 = Date(day = "2023-4-23", steps = 2000, user_id = u1.id)
-    d2 = Date(day = "2023-4-23", steps = 3000, user_id = u2.id)
-    d3 = Date(day = "2023-4-23", steps = 4000, user_id = u3.id)
-    d4 = Date(day = "2023-4-24", steps = 5000, user_id = u1.id)
-    d5 = Date(day = "2023-4-24", steps = 6000, user_id = u2.id)
-    d6 = Date(day = "2023-4-24", steps = 7000, user_id = u3.id)
+    d1 = Date(day = "2023-4-23", steps = 20000, user_id = u1.id)
+    d2 = Date(day = "2023-4-23", steps = 290000, user_id = u2.id)
 
-    dates = [d1, d2, d3, d4, d5, d6]
+    dates = [d1, d2]
     db.session.add_all(dates)
     db.session.commit()
 
@@ -96,14 +92,37 @@ with app.app_context():
 
 
     print('Creating Cat Owners ... ')
-    uc1 = UserCat(user_id = u1.id, cat_id = c1.id)
-    uc2 = UserCat(user_id = u2.id, cat_id = c1.id)
-    uc3 = UserCat(user_id = u2.id, cat_id = c2.id)
-    uc4 = UserCat(user_id = u3.id, cat_id = c1.id)
-    uc5 = UserCat(user_id = u3.id, cat_id = c2.id)
-    uc6 = UserCat(user_id = u3.id, cat_id = c3.id)
+    uc1 = UserCat(user_id = u2.id, cat_id = c1.id)
+    uc2 = UserCat(user_id = u2.id, cat_id = c2.id)
+    uc3 = UserCat(user_id = u2.id, cat_id = c3.id)
+    uc4 = UserCat(user_id = u2.id, cat_id = c4.id)
+    uc5 = UserCat(user_id = u2.id, cat_id = c5.id)
+    uc6 = UserCat(user_id = u2.id, cat_id = c6.id)
+    uc7 = UserCat(user_id = u2.id, cat_id = c7.id)
+    uc8 = UserCat(user_id = u2.id, cat_id = c8.id)
+    uc9 = UserCat(user_id = u2.id, cat_id = c9.id)
+    uc10 = UserCat(user_id = u2.id, cat_id = c10.id)
+    uc11 = UserCat(user_id = u2.id, cat_id = c11.id)
+    uc12 = UserCat(user_id = u2.id, cat_id = c12.id)
+    uc13 = UserCat(user_id = u2.id, cat_id = c13.id)
+    uc14 = UserCat(user_id = u2.id, cat_id = c14.id)
+    uc15 = UserCat(user_id = u2.id, cat_id = c15.id)
+    uc16 = UserCat(user_id = u2.id, cat_id = c16.id)
+    uc17 = UserCat(user_id = u2.id, cat_id = c17.id)
+    uc18 = UserCat(user_id = u2.id, cat_id = c18.id)
+    uc19 = UserCat(user_id = u2.id, cat_id = c19.id)
+    uc20 = UserCat(user_id = u2.id, cat_id = c20.id)
+    uc21 = UserCat(user_id = u2.id, cat_id = c21.id)
+    uc22 = UserCat(user_id = u2.id, cat_id = c22.id)
+    uc23 = UserCat(user_id = u2.id, cat_id = c23.id)
+    uc24 = UserCat(user_id = u2.id, cat_id = c24.id)
+    uc25 = UserCat(user_id = u2.id, cat_id = c25.id)
+    uc26 = UserCat(user_id = u2.id, cat_id = c26.id)
+    uc27 = UserCat(user_id = u2.id, cat_id = c27.id)
+    uc28 = UserCat(user_id = u2.id, cat_id = c28.id)
+    uc29 = UserCat(user_id = u2.id, cat_id = c29.id)
 
-    usercats = [uc1, uc2, uc3, uc4, uc5, uc6]
+    usercats = [uc1, uc2, uc3, uc4, uc5, uc6, uc7, uc8, uc9, uc10, uc11, uc12, uc13, uc14, uc15, uc16, uc17, uc18, uc19, uc20, uc21, uc22, uc23, uc24, uc25, uc26, uc27, uc28, uc29]
     db.session.add_all(usercats)
     db.session.commit()
 
