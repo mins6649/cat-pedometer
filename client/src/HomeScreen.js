@@ -13,7 +13,7 @@ function HomeScreen({navigation, route}) {
         style={styles.sadCat}
         source={require('../assets/sadCat.png')}
       />
-      <Text style={styles.noGotcha}>
+      <Text style={[styles.noGotcha, styles.text]}>
         No cats to be collected
       </Text>
     </View>
@@ -33,18 +33,18 @@ function HomeScreen({navigation, route}) {
             <ImageBackground source={require('../assets/nature-background.jpeg')} style={styles.background}>
               <Text style={styles.title}>PawDometer</Text>
                 <View style={styles.container}>
-                  <Text>Today's Current Steps: </Text>
-                  <Text style={styles.stepsText}>{dailySteps} steps</Text>
+                  <Text style={styles.text}>Today's Current Steps: </Text>
+                  <Text style={[styles.text, styles.stepsText]}>{dailySteps} steps</Text>
                 </View>
 
                 <View style={styles.container}>
-                  <Text>Currently on a walk? Count your steps:</Text>
-                  <Text style={styles.stepsText}>{currentStepCount} steps</Text>
+                  <Text style={styles.text}>Count your steps as you walk:</Text>
+                  <Text style={[styles.text, styles.stepsText]}>{currentStepCount} steps</Text>
                 </View>
 
                 <View style={styles.container}>
-                    <Text>Total Number of Steps:</Text>
-                    <Text style={styles.stepsText}>{totalSteps} steps</Text>
+                    <Text style={styles.text}>Total Number of Steps:</Text>
+                    <Text style={[styles.text, styles.stepsText]}>{totalSteps} steps</Text>
                 </View>
 
                 <View style={[styles.container, (catsToBeCollected > 0) ? styles.gachaContainerReady : styles.gachaContainer]}>
@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
         textShadowColor: 'pink',
         textShadowOffset: {width: -3, height: 1},
         textShadowRadius: 5,
-        paddingVertical: 10
+        paddingVertical: 10,
+        fontFamily: 'Gaegu-Bold'
       },
       container:{
         backgroundColor: 'rgba(255, 192, 203, 0.9)',
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',
-        fontSize: 20,
+        fontSize: 28,
         paddingTop: 10
       },
       noGotchaContainer: {
@@ -123,4 +124,8 @@ const styles = StyleSheet.create({
       noGotcha: {
         textAlign: 'center'
       },
+      text: {
+        fontFamily: 'Gaegu-Bold',
+        fontSize: 18
+      }
   });

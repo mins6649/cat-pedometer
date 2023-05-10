@@ -68,9 +68,19 @@ function CatList({cats}){
     })
 
     return(
-        <View>
+        <View style={styles.layout}>
             {renderCats}
         </View>
     )
 }
 export default CatList;
+
+const styles = StyleSheet.create({
+    layout: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        flexDirection: 'row'
+      }
+  });

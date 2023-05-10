@@ -144,7 +144,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textShadowColor: 'pink',
     textShadowOffset: {width: -3, height: 1},
-    textShadowRadius: 5
+    textShadowRadius: 5,
+    fontFamily: 'Gaegu-Bold'
   },
   buttonContainer: {
     alignItems: 'center',
@@ -163,7 +164,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     color: '#20232a',
     fontSize: 20,
-    padding: 8
+    padding: 8,
+    fontFamily: 'Gaegu-Regular'
   },
   buttonText: {
     textAlign: 'center'
