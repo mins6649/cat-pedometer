@@ -1,17 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, Text, View, ImageBackground, AppRegistry } from 'react-native';
+import {StyleSheet} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useFonts} from 'expo-font';
 
 import Login from './Login';
 import Main from './Main'; 
-import PedometerProvider from './PedometerProvider';
 
 const Stack = createNativeStackNavigator()
 
 
 function App() {
+  const [fontsLoaded] = useFonts({
+    'Gaegu-Regular': require('../assets/fonts/Gaegu-Regular.ttf'),
+    'Gaegu-Bold': require('../assets/fonts/Gaegu-Bold.ttf')
+  });
+  // if (!fontsLoaded) {
+  //   return <AppLoading />;
+  // }
   const [user, setUser] = useState(null);
   const [cats, setCats] = useState(null);
   useEffect(()=>{
@@ -34,11 +41,11 @@ function App() {
   console.log("APP CAT", cats)
   
   return (
-    <NavigationContainer>
+    <NavigationContainer style={styles.container}>
         <Stack.Navigator>
         {user != null && cats !=null ? (
             <Stack.Screen 
-              name="MAIN CONTAINER"
+              name="Walk 10K steps to get a cat !"
               component={Main}
               initialParams={{user, cats, setUser}}
             />
@@ -55,11 +62,8 @@ function App() {
 }
 export default App;
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    fontFamily: 'Gaegu-Regular'
+  },
+});
