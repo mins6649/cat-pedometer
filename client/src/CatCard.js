@@ -4,12 +4,12 @@ import { StyleSheet, View, Text, Image } from "react-native";
 function CatCard({name, image, description }){
    
     return(
-        <View style={styles.container}>
+        <View style={styles.catCardContainer}>
             <View style={styles.catCard}>
-                <Text style={styles.text}>{name}</Text>
+                <Text style={styles.catCardText}>{name}</Text>
                 <Image  
                     source={image} 
-                    style={{width: 64, height: 64, position: 'relative'}} 
+                    style={{width: 90, height: 90, position: 'relative'}} 
                 />
             </View>
         </View>
@@ -18,20 +18,20 @@ function CatCard({name, image, description }){
 export default CatCard;
 
 const styles = StyleSheet.create({
-    container: {
+    catCardContainer: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         flexBasis: '33%',
-        marginVertical: 10,
+        marginVertical: 10
     },
     catCard: {
         backgroundColor: 'pink',
         borderRadius: 20,
-        flexBasis: '33%',
-        padding: 7
+        padding: 7,
+        height: 110
     },
-    text: {
+    catCardText: {
         textAlign: 'center',
         fontFamily: 'Gaegu-Bold',
         fontSize: 20

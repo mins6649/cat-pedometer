@@ -45,7 +45,7 @@ function Login({navigation, route}) {
       setIsForm(!isForm)
     }
     async function handleSubmit() {
-      fetch(`http://10.129.2.160:5555/login`, {
+      fetch(`http://192.168.1.186:5555/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +64,7 @@ function Login({navigation, route}) {
     }
     function handleSignup(){
       const userObj = {username: createUsername, email: createEmail, password: createPassword}
-      fetch('http://10.129.2.160:5555/signup',{
+      fetch('http://192.168.1.186:5555/signup',{
         method: "POST",
         headers: {
           "Content-Type": "application/json",
