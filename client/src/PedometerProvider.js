@@ -23,7 +23,7 @@ const PedometerProvider = (props) => {
         let randomInt = Math.ceil(Math.random() * cats.length)
         var catObj = {user_id: user.id, cat_id: randomInt}
         
-        await fetch(`http://10.129.2.160:5555/user_cats`, {
+        await fetch(`http://192.168.1.186:5555/user_cats`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -32,10 +32,11 @@ const PedometerProvider = (props) => {
         })
         .then(res => res.json())
         .then(data => {
-          setOpenGatcha(false)
-          setCatsToBeCollected(prev=>prev-1)
           setCatUserOwns([...catUserOwns, data.cat])
+          setCatsToBeCollected(prev=>prev-1)
+          setTimeout(() => {setOpenGatcha(false)}, 2000)
       })
+
     }
 
     //Total Steps Logic:
@@ -89,7 +90,7 @@ const PedometerProvider = (props) => {
             const dailyStepsResult = await Pedometer.getStepCountAsync(start, end);
             let dayObj = {day: dateInput, steps: dailyStepsResult.steps, user_id: user.id}
        
-            await fetch(`http://10.129.2.160:5555/dates`, {
+            await fetch(`http://192.168.1.186:5555/dates`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

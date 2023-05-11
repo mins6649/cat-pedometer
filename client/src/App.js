@@ -7,24 +7,24 @@ import {useFonts} from 'expo-font';
 
 import Login from './Login';
 import Main from './Main'; 
-
+//npx expo install react-native@0.71.7
 const Stack = createNativeStackNavigator()
 
 
 function App() {
   const [fontsLoaded] = useFonts({
-    // 'Gaegu-Regular': require('../assets/fonts/Gaegu-Regular.ttf'),
+    'Gaegu-Regular': require('../assets/fonts/Gaegu-Regular.ttf'),
     'Gaegu-Bold': require('../assets/fonts/Gaegu-Bold.ttf')
   });
   const [user, setUser] = useState(null);
   const [cats, setCats] = useState(null);
   useEffect(()=>{
-      fetch(`http://10.129.2.160:5555/cats`)
+      fetch(`http://192.168.1.186:5555/cats`)
       .then(res => res.json())
       .then(data => setCats(data))
       AsyncStorage.getItem('loggedIn').then((value) => {
         if (value) {
-          fetch(`http://10.129.2.160:5555/users/${value}`)
+          fetch(`http://192.168.1.186:5555/users/${value}`)
           .then(res => res.json())
           .then(data => setUser(data))
         }

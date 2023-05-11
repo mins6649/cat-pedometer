@@ -1,11 +1,13 @@
 import React, {useContext} from 'react';
-import { StyleSheet, Text, View, ImageBackground, Button, Image} from 'react-native';
+import { StyleSheet, Text, View, ImageBackground, Button, Image, Modal} from 'react-native';
 import { pedometerContext } from './PedometerProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import CatList from './CatList';
+// import Modal from "react-native-modal";
 
 function HomeScreen({navigation, route}) {
-    const { totalSteps, catsToBeCollected, dailySteps, remainingSteps, currentStepCount, gotcha} = useContext(pedometerContext)
+    const { totalSteps, catsToBeCollected, dailySteps, currentStepCount, openGatcha, catUserOwns, gotcha} = useContext(pedometerContext)
     let isGotcha = <Button onPress = {gotcha} title= {catsToBeCollected.toString() + ` Cat${catsToBeCollected === 1 ? '' : 's'} Ready To Be Collected!`}/>
     let noGotcha = 
     <View style={styles.noGotchaContainer}>
@@ -19,7 +21,7 @@ function HomeScreen({navigation, route}) {
     </View>
 
     function handleLogout() {
-      fetch(`http://10.129.2.160:5555/logout`, {
+      fetch(`http://192.168.1.186:5555/logout`, {
         method: "DELETE",
       })
       .then(() => {
@@ -50,9 +52,20 @@ function HomeScreen({navigation, route}) {
                 <View style={[styles.container, (catsToBeCollected > 0) ? styles.gachaContainerReady : styles.gachaContainer]}>
                     {catsToBeCollected ? isGotcha : noGotcha}
                 </View>
-                {/* <View style={[styles.container, styles.cat_animation]}>
-                    <Text>CAT ANIMATION</Text>
-                </View> */}
+                
+                <Modal 
+                  visible={openGatcha}
+                  transparent={true}
+                  // presentationStyle='overFullScreen' 
+                >
+                  <View style={styles.modalContainer}>
+                    <Text style={styles.gotchaTitle}>You have a new cat!</Text>
+                    <View style={styles.modal}>
+                      {catUserOwns.length > 0 ? <CatList cats={[catUserOwns[catUserOwns.length-1]]}/> : null}
+                    </View>
+                  </View>
+                </Modal>
+
                 <Button
                   onPress={handleLogout}
                   title='Logout'
@@ -127,5 +140,23 @@ const styles = StyleSheet.create({
       text: {
         fontFamily: 'Gaegu-Bold',
         fontSize: 18
+      },
+      modalContainer: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: 'rgba(100,100,100,0.5)',
+        flex: 1,
+        justifyContent: 'center'
+      },
+      modal: {
+        marginTop: 20,
+        height: 100
+      },
+      gotchaTitle: {
+        fontSize: 30,
+        textAlign: 'center',
+        fontFamily: 'Gaegu-Bold',
+        color: 'white'
+
       }
   });
